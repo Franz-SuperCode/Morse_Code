@@ -40,7 +40,7 @@ let morseAlphabet = [
     { letter: "Z", morseCode: "--.." }
 ];
 
-let inputArray = [];
+
 
 let inputElement = document.querySelector("#input");
 let buttonElement = document.querySelector("#encrypt");
@@ -50,9 +50,10 @@ let outputElement = document.querySelector("#output");
 buttonElement.addEventListener("click", (event) => {
     event.preventDefault();
 
-    let inputUpperCase = input.value.toUpperCase();
+    //Input in Großbuchstaben
+    let inputUpperCase = inputElement.value.toUpperCase();
 
-    //Es soll von 0 bis die Länge von Input gehen
+    //Es soll von 0 bis die Länge von Input gehen (z.B. bei "Hallo", 5mal)
     for (i = 0; i <= (input.value.length) - 1; i++) {
         //Speichere jeweils immer den Buchstaben
         let letter = inputUpperCase.charAt(i);
@@ -61,11 +62,17 @@ buttonElement.addEventListener("click", (event) => {
         for (let i = 0; i <= 36; i++) {
             //Falls die Eingabe mit dem MorseCode übereinstimmt, für jede Zahl von 1-37 ausspucken
             if (letter === morseAlphabet[i].letter) {
-                console.log(morseAlphabet[i].morseCode);
+                let morsecode = (morseAlphabet[i].morseCode);
+                //Erstelle neue p-Elemente mit den Buchstaben
+                let newP = document.createElement("p");
+                newP.textContent = `${letter} = ${morsecode}`;
+                //Am Ende des Formulars einfügen
+                document.querySelector("form").appendChild(newP);
             }
+
         }
     }
-
+    outputElement.textContent = "Explanation"
 })
 
 
